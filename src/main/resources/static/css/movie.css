@@ -1,0 +1,46 @@
+.main {
+    font-size: 1.2em;
+}
+.main .movie{
+    background-color: violet;
+    width: 300px;
+    height: 300px;
+}
+.movie-body .movie-contain{
+    float: left;
+    width: 80%;
+
+}
+.movie-body .movie-nav{
+    float: right;
+    width: 20%;
+}
+.main #poster{
+    width:160px;
+    height: 200px;
+}
+ 主页样式
+.movie-list .movie-list-item{
+     width:160px;
+     height: 200px;
+
+ }
+.movie-list-item #poster{
+    width:100%;
+    height: 180px;
+}
+.movie-list-item #name{
+    float: left;
+}
+.movie-list-item #score{
+    color: red;
+    /* : px; */
+    /* padding-right: 1px ;
+    margin-right: 1px; */
+}
+
+/*播放页面*/
+.remark-item #picture{
+    width: 50px;
+    height: 40px;
+}

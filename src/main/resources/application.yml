@@ -1,0 +1,43 @@
+
+spring:
+#  引入其他配置文件
+  profiles:
+    include: classpath:/config/redis.yml
+  datasource:
+    url: jdbc:mysql://localhost:3306/moviesite?useSSl=false&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #thymeleaf模板配置
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+
+    #springMVC 静态资源拦截
+#  mvc:
+#    static-path-pattern: /static/**
+#  resources:
+#    static-locations: classpath:/static/
+
+    #spring.http.multipart.maxFileSize=10000Mb
+#    热部署
+#  devtools:
+#    restart:
+#      enabled: true
+server:
+  port: 8081
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.cjc.movie.entity
+  mapper-locations: classpath:/mapper/*.xml
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+#web:
+#  upload-path: D:/cjc/movie/

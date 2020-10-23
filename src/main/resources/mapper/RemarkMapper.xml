@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjc.movie.mapper.RemarkMapper">
+
+    <select id="selectRemarks" resultType="com.cjc.movie.entity.vo.RemarkVO">
+        select
+            user.name as userName,user.picture as userPicture,
+            remark.create_time,remark.mark,remark.unMark,remark.title,remark.item
+        from remark left join user on remark.user_id=user.id
+        where remark.state=0
+         <if test=" ''!=movieId and movieId !=null">and remark.movie_id=#{movieId}</if>
+    </select>
+
+</mapper>

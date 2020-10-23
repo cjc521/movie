@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjc.movie.mapper.MovieMapper">
+
+    <select id="selectMovies" resultType="com.cjc.movie.entity.vo.MovieVO">
+        select m.id ,m.name,m.poster,m.film,m.release_time,m.introduce,a.name as area,
+        t.name as type,m.down,m.score,m.upload_time
+        from  movie as m left join  area as a on areaId=a.id left join movie_type as t
+        on typeId=t.id where m.state=0
+        <if test="areaId !=0">
+            a.id=#{areaId}
+        </if>
+        <if test="movieTypeId !=0">
+            t.id=#{movieTypeId}
+        </if>
+    </select>
+    <select id="selectMoviesBySearch" resultType="com.cjc.movie.entity.vo.MovieVO">
+        select m.id ,m.name,m.poster,m.film,m.release_time,m.introduce,a.name as area,t.name
+        as type,m.down,m.score,m.upload_time
+        from  movie as m left join  area as a on areaId=a.id
+        left join    movie_Type as t on typeId=t.id
+        <where>
+             <if test="name !=null ">m.name like "%${name}%"</if>
+             <if test="minScore !=null ">and m.score &gt;= #{minScore}</if>
+             <if test="maxScore !=null ">and m.score &lt;= #{maxScore}</if>
+             <if test="1==1">and m.state=0 and a.state=0 and t.state=0</if>
+        </where>
+    </select>
+
+    <select id="selectMovie" resultType="com.cjc.movie.entity.vo.MovieVO">
+        select m.id ,m.name,m.poster,m.film,m.release_time,m.introduce,a.name as area,
+        t.name as type,m.down,m.score,m.upload_time
+        from  movie as m left join  area as a on areaId=a.id left join movie_type as t
+        on typeId=t.id where m.state=0
+        <if test=" id !=null"> and m.id=#{id} </if>
+    </select>
+    <select id="selectOtherMovies" resultType="com.cjc.movie.entity.vo.MovieVO">
+        select m.id ,m.name,m.poster,m.film,m.release_time,m.introduce,a.name as area,
+        t.name as type,m.down,m.score,m.upload_time
+        from  movie as m left join  area as a on areaId=a.id left join movie_type as t
+        on typeId=t.id where m.state=0
+        <if test=" (type!='' and type!=null)"> and t.name=#{type} </if>
+          limit 0,12
+    </select>
+
+</mapper>
